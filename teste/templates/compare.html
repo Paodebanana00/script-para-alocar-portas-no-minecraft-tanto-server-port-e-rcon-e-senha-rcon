@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparar Planos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-4 gap-4">
+            <div class="col-span-1"></div>
+            {% for plan in plans %}
+            <div class="col-span-1 bg-white rounded-lg shadow p-4">
+                <h3 class="text-xl font-bold">{{ plan.name }}</h3>
+                <div class="mt-4 space-y-2">
+                    <div>RAM: {{ plan.ram }}GB</div>
+                    <div>CPU: {{ plan.cores }} cores</div>
+                    <div>Disco: {{ plan.disk }}</div>
+                    {% for feature in plan.features %}
+                    <div>{{ feature }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

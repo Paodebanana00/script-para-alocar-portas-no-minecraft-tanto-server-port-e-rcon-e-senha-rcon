@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-6">Checkout</h2>
+    
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-4">Resumo do Pedido</h3>
+            <ul class="space-y-2">
+                {% for item in cart_items %}
+                <li class="flex justify-between">
+                    <span>{{ item.name }}</span>
+                    <span class="font-semibold">R$ {{ "%.2f"|format(item.price) }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="border-t mt-4 pt-4">
+                <div class="flex justify-between font-bold">
+                    <span>Total</span>
+                    <span>R$ {{ "%.2f"|format(total_price) }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <form method="POST" class="space-y-4">
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">
+                Confirmar Pedido
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
