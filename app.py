@@ -54,7 +54,7 @@ plans = [
         "name": "Start",
         "cores": 2,
         "ram": 2,
-        "disk": "20GB SSD NVMe",
+        "disk": "20GB",
         "bandwidth": "Ilimitado",
         "price": 19.99,
         "features": [
@@ -70,7 +70,7 @@ plans = [
         "name": "Pro",
         "cores": 4,
         "ram": 4,
-        "disk": "40GB SSD NVMe",
+        "disk": "40GB",
         "bandwidth": "Ilimitado",
         "price": 39.99,
         "features": [
@@ -87,7 +87,7 @@ plans = [
         "name": "Ultra",
         "cores": 6,
         "ram": 8,
-        "disk": "80GB SSD NVMe",
+        "disk": "80GB",
         "bandwidth": "Ilimitado",
         "price": 59.99,
         "features": [
