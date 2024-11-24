@@ -36,10 +36,13 @@ def save_database(base_directory, database):
 
 def generate_random_port(range_start, range_end, exclude_ports):
     """Gera uma porta aleatória dentro de um intervalo, excluindo portas específicas e já utilizadas."""
+
+    additional_excluded_ports = [5040, 8080]
+
     attempts = 0
     while attempts < 1000:  # Evitar loop infinito
         port = random.randint(range_start, range_end)
-        if port not in exclude_ports:
+        if port not in exclude_ports:  # Verifica se a porta não está na lista de exclusão
             return port
         attempts += 1
     raise ValueError("Não foi possível gerar uma porta aleatória não utilizada.")
