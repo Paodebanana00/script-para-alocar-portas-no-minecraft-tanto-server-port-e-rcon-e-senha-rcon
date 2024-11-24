@@ -176,5 +176,5 @@ file_paths = find_server_properties_files(base_directory)
 while True:
     remove_deleted_servers_from_database(database, file_paths, base_directory)
     update_server_properties(file_paths, database, base_directory)
-    logging.info("Aguardando 10 minutos para a próxima atualização...")
+    logging.info("Aguardando 10 segundos para a próxima atualização...")
     time.sleep(10)
