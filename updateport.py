@@ -164,7 +164,7 @@ def update_server_properties(file_paths, database, base_directory):
         save_database(base_directory, database)
 
 # Caminho base onde estão os servidores
-base_directory = "caminho da sua pasta de servid"
+base_directory = "caminho da sua pasta de servidores"
 
 # Carrega o banco de dados ou cria um novo
 database = load_database(base_directory)
