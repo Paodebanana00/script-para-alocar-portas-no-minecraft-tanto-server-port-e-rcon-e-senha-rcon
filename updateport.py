@@ -52,6 +52,10 @@ def generate_random_password(length=16):
     characters = string.ascii_letters + string.digits + "!@#$%^&*()"
     return ''.join(random.choice(characters) for _ in range(length))
 
+def is_bedrock_server(server_directory):
+    """Verifica se o servidor é do tipo Bedrock (contém o arquivo bedrock_server.exe)."""
+    return os.path.exists(os.path.join(server_directory, 'bedrock_server.exe'))
+
 def find_server_properties_files(base_directory):
     """Encontra todos os arquivos server.properties dentro do diretório base e seus subdiretórios."""
     file_paths = []
@@ -71,12 +75,15 @@ def update_server_properties(file_paths, database, base_directory):
         server_directory = os.path.dirname(file_path)
         server_id = os.path.basename(server_directory)
 
+        is_bedrock = is_bedrock_server(server_directory)  # Verifica se é um servidor Bedrock
+
         if server_id not in database:
             database[server_id] = {
                 "server_port": None,
                 "server-portv6": None,
                 "rcon_port": None,
-                "rcon_password": None
+                "rcon_password": None,
+                "is_bedrock": is_bedrock  # Armazena se é Bedrock ou não
             }
 
         with open(file_path, 'r') as file:
@@ -92,13 +99,13 @@ def update_server_properties(file_paths, database, base_directory):
                     database[server_id]["server_port"] = new_port
                     used_ports.append(new_port)
                 updated_lines.append(f"server-port={database[server_id]['server_port']}\n")
-            elif key == "server-portv6":
+            elif key == "server-portv6" and is_bedrock:  # Só aplica para Bedrock
                 if database[server_id]["server-portv6"] is None:
                     new_portv6 = generate_random_port(1024, 32254, used_ports)
                     database[server_id]["server-portv6"] = new_portv6
                     used_ports.append(new_portv6)
                 updated_lines.append(f"server-portv6={database[server_id]['server-portv6']}\n")
-            elif key == "rcon.port":
+            elif key == "rcon.port" and not is_bedrock:  # Só aplica para servidores não Bedrock
                 if database[server_id]["rcon_port"] is None:
                     new_rcon_port = generate_random_port(32255, 65535, used_ports)
                     database[server_id]["rcon_port"] = new_rcon_port
